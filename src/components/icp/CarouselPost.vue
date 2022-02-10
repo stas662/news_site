@@ -3,13 +3,13 @@
     <div class="sub-articlespost">
       <div class="content-sub-articlespost">
         <div class="content-sub-articlespost___title">
-          {{this.$store.getters['posts/recommendedPosts'][this.$route.params.id - 1].title}}
+          {{this.$store.getters['posts/carouselPosts'][this.$route.params.id - 1].title}}
         </div>
         <div class="content-sub-articlespost___body">
           <div class="content-sub-articlespost___element">
-            {{this.$store.getters['posts/recommendedPosts'][this.$route.params.id - 1].body}}
+            {{this.$store.getters['posts/carouselPosts'][this.$route.params.id - 1].body}}
             <img style="width: 100%; margin: 15px 15px 0 0;"
-                 :src="this.$store.getters['posts/recommendedPosts'][this.$route.params.id - 1].img"
+                 :src="this.$store.getters['posts/carouselPosts'][this.$route.params.id - 1].img"
                  alt="image">
           </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="content-sub-articlespost___title">Коментарии</div>
         <div class="content-sub-articlespost___body">
           <div class="content-sub-articlespost___block"
-               v-for="(comment, index) in this.$store.getters['comments/getComments'](this.$store.getters['posts/recommendedPosts'][this.$route.params.id - 1].id)"
+               v-for="(comment, index) in this.$store.getters['comments/getComments'](this.$store.getters['posts/carouselPosts'][this.$route.params.id - 1].id)"
                :key="comment">
             <div class="content-sub-articlespost___element-body">
               {{comment.idLogin}}
@@ -87,7 +87,7 @@ export default {
       if (this.$store.getters['users/isAuth']) {
         this.$store.dispatch('comments/createComment', {
           body: this.body,
-          idPost: this.$store.getters['posts/recommendedPosts'][this.$route.params.id - 1].id,
+          idPost: this.$store.getters['posts/carouselPosts'][this.$route.params.id - 1].id,
           idUser: this.$store.getters['users/getId'](this.$store.getters['users/userEmail']),
           idLogin: this.$store.getters['users/getUser'](this.$store.getters['users/userEmail']).login
         })

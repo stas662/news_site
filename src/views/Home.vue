@@ -1,17 +1,17 @@
 <template>
   <div>
-      <RecommendedPosts />
+      <Carousel />
       <NewsPosts />
   </div>
 </template>
 
 <script>
-import RecommendedPosts from '@/components/RecommendedPosts.vue'
+import Carousel from '@/components/Carousel.vue'
 import NewsPosts from '@/components/NewsPosts.vue'
 
 export default {
   name: 'Content',
-  components: { RecommendedPosts, NewsPosts }
+  components: { Carousel, NewsPosts }
 }
 </script>
 

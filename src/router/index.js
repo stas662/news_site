@@ -8,13 +8,15 @@ import Technics from '@/views/Technics.vue'
 import Space from '@/views/Space.vue'
 import Gadgets from '@/views/Gadgets.vue'
 import AddPost from '@/views/AddPost.vue'
-import RecommendationsPost from '@/components/icp/RecommendationsPost.vue'
+import CarouselPost from '@/components/icp/CarouselPost.vue'
 import NewsPost from '@/components/icp/NewsPost.vue'
 import ArticlesPost from '@/components/icp/ArticlesPost.vue'
 import SciencePost from '@/components/icp/SciencePost.vue'
 import TechnicsPost from '@/components/icp/TechnicsPost.vue'
 import SpacePost from '@/components/icp/SpacePost.vue'
 import GadgetsPost from '@/components/icp/GadgetsPost.vue'
+import PopularPosts from '@/components/icp/PopularPosts.vue'
+import RecommendedPost from '@/components/icp/RecommendedPost.vue'
 
 const routes = [
   {
@@ -66,7 +68,7 @@ const routes = [
   },
   {
     path: '/:id',
-    component: RecommendationsPost
+    component: CarouselPost
   },
   {
     path: '/news/:id',
@@ -91,12 +93,24 @@ const routes = [
   {
     path: '/gadgets/:id',
     component: GadgetsPost
+  },
+  {
+    path: '/popul/:id',
+    component: PopularPosts
+  },
+  {
+    path: '/recommended/:id',
+    component: RecommendedPost
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    // always scroll to top
+    return { top: 0 }
+  }
 })
 
 export default router

@@ -1,14 +1,14 @@
 <template>
-  <div class="wrapper-articlesposts">
-    <div class="content-articlesposts">
-      <router-link to="/news" class="content-articlesposts__title">Новости</router-link>
-      <div class="content-articlesposts__body">
-        <div class="content-articlesposts__block"
-             v-for="(post, index) in this.$store.getters['posts/articlesPosts']"
-             :key="post">
-          <div class="content-articlesposts__element" >
-            <router-link :to="`/news/${index + 1}`">
-              <img :src="post.img" alt="">
+  <div class="wrapper-recommend">
+    <div class="content-recommend">
+      <div class="content-recommend__title">Рекомендуемое</div>
+      <div class="content-recommend__body">
+        <div class="content-recommend__block"
+            v-for="(post, index) in this.$store.getters['posts/filterPosts']('Техника')"
+            :key="post">
+          <div class="content-recommend__element" >
+            <router-link :to="`/recommended/${index + 1}`">
+              <img v-if="index === 0" :src="post.img" alt="">
               <div>{{post.title}}</div>
             </router-link>
           </div>
@@ -25,8 +25,6 @@ export default {
     return {
       imgUrl: ''
     }
-  },
-  components: {
   }
   // Кнопка дозагрузки постов
   // data () {
@@ -45,43 +43,39 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.wrapper-articlesposts {
+.wrapper-recommend {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 65%;
 }
 
-.content-articlesposts {
+.content-recommend {
   padding: 15px 0 0 0;
   margin-top: 10px;
+  width: 100%;
   border: 3px solid #151a1e;
   box-shadow: 0px 0px 10px #151a1e;
 }
 
-.content-articlesposts__title {
+.content-recommend__title {
   padding: 5px;
   margin-left: 30px;
   font-size: 30px;
 }
 
-.content-articlesposts__title:hover {
-  color: #808080;
-}
-
-.content-articlesposts__body {
+.content-recommend__body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 0 15px;
 }
 
-.content-articlesposts__block {
+.content-recommend__block {
   display: flex;
   width: 100%;
 }
 
-.content-articlesposts__element {
+.content-recommend__element {
   display: flex;
   width: 100%;
   margin: 15px;
@@ -89,27 +83,28 @@ export default {
   box-shadow: inset 0px 0px 10px #333;
 }
 
-.content-articlesposts__element:hover {
+.content-recommend__element:hover {
   background: rgba(51, 51, 51, 0.3);
 }
 
-.content-articlesposts__element a {
+.content-recommend__element a {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 25px;
   text-decoration: none;
 }
 
-.content-articlesposts__element a div {
+.content-recommend__element a div {
   padding: 10px 15px;
   color: #fff;
   margin-bottom: auto;
   font-size: 25px;
 }
 
-.content-articlesposts__element a img {
+.content-recommend__element a img {
   width: 100%;
   max-width: 400px;
 }

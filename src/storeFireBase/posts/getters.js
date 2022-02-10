@@ -15,16 +15,44 @@
 // }
 
 export default {
-  recommendedPosts (state) {
-    return state.posts.filter(post => post.radioNames === 'Поместить в рекомендации')
+  carouselPosts (state) {
+    return state.posts.filter(post => post.radioNames === 'Поместить в слайдер')
   },
 
   newsPosts (state) {
-    return state.posts.filter(post => post.selected === 'Новость')
+    const arrayNews = []
+    let count = 0
+    for (let i = 0; i < state.posts.length; i++) {
+      if (state.posts[i].selected === 'Новость' && count < 5) {
+        count++
+        arrayNews.push(state.posts[i])
+      }
+    }
+    return arrayNews
   },
 
   articlesPosts (state) {
-    return state.posts.filter(post => post.selected === 'Статья')
+    const arrayArticles = []
+    let count = 0
+    for (let i = 0; i < state.posts.length; i++) {
+      if (state.posts[i].selected === 'Статья' && count < 3) {
+        count++
+        arrayArticles.push(state.posts[i])
+      }
+    }
+    return arrayArticles
+  },
+
+  // Поиск популярных постов по количеству комментариев
+  // Примечание доработать добавив дату и сортировку
+  popularPosts (state, getters, rootState, rootGetters) {
+    const popularArray = []
+    for (let i = 0; i < state.posts.length; i++) {
+      if (rootGetters['comments/getComments'](state.posts[i].id).length > 0) {
+        popularArray.push(state.posts[i])
+      }
+    }
+    return popularArray
   },
 
   filterPosts: state => string => {

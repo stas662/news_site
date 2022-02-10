@@ -1,16 +1,33 @@
 <template>
   <div class="wrapper-newsposts">
     <div class="content-newsposts" style="flex: 65%">
-      <router-link to="/news" class="content-newsposts__title">Новости</router-link>
-      <div class="content-newsposts__body">
-        <div class="content-newsposts__block"
-             v-for="(post, index) in this.$store.getters['posts/newsPosts']"
-             :key="post">
-          <div class="content-newsposts__element" >
-            <router-link :style="`background: url(${post.img}) center no-repeat;`"
-                         :to="`/news/${index + 1}`">
-              {{post.title}}
-            </router-link>
+      <div>
+        <router-link to="/news" class="content-newsposts__title">Новости</router-link>
+        <div class="content-newsposts__body">
+          <div class="content-newsposts__block"
+              v-for="(post, index) in this.$store.getters['posts/newsPosts']"
+              :key="post">
+            <div class="content-newsposts__element" >
+              <router-link :to="`/news/${index + 1}`">
+                <img :src="post.img" alt="">
+                <div>{{post.title}}</div>
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <router-link to="/news" class="content-newsposts__title">Статьи</router-link>
+        <div class="content-newsposts__body">
+          <div class="content-newsposts__block"
+              v-for="(post, index) in this.$store.getters['posts/articlesPosts']"
+              :key="post">
+            <div class="content-newsposts__element" >
+              <router-link :to="`/articles/${index + 1}`">
+                <img :src="post.img" alt="">
+                <div>{{post.title}}</div>
+              </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -18,15 +35,17 @@
     <div style="margin-left: 5px; flex: 34%; display: flex; flex-direction: column">
       <Authorization v-if="!this.$store.getters['users/isAuth']" />
       <SmallAccount v-else />
-      <ArticlesPosts />
+      <Popular />
+      <Recommended />
     </div>
   </div>
 </template>
 
 <script>
 import Authorization from '@/components/Authorization.vue'
-import ArticlesPosts from '@/components/ArticlesPosts.vue'
 import SmallAccount from '@/components/SmallAccount.vue'
+import Popular from '@/components/Popular.vue'
+import Recommended from '@/components/Recommended.vue'
 
 export default {
   data () {
@@ -36,8 +55,9 @@ export default {
   },
   components: {
     Authorization,
-    ArticlesPosts,
-    SmallAccount
+    SmallAccount,
+    Popular,
+    Recommended
   }
   // Кнопка дозагрузки постов
   // data () {
@@ -62,7 +82,7 @@ export default {
   flex-wrap: wrap;
 }
 
-.content-newsposts {
+.content-newsposts > div {
   padding: 15px 0 0 0;
   margin-top: 10px;
   border: 3px solid #151a1e;
@@ -88,31 +108,40 @@ export default {
 
 .content-newsposts__block {
   display: flex;
-  width: 50%;
+  width: 100%;
 }
 
 .content-newsposts__element {
   display: flex;
   width: 100%;
   margin: 15px;
-  height: 205px;
   font-weight: bold;
+  box-shadow: inset 0px 0px 10px #333;
+}
+
+.content-newsposts__element:hover {
+  background: rgba(51, 51, 51, 0.3);
 }
 
 .content-newsposts__element a {
   width: 100%;
-  color: #000;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  padding: 35px;
+  padding: 25px;
   text-decoration: none;
+}
+
+.content-newsposts__element a div {
+  padding: 10px 15px;
+  color: #fff;
+  margin-bottom: auto;
   font-size: 25px;
 }
 
-.content-newsposts__element a:hover {
-  box-shadow: inset 0px 0px 10px #333;
+.content-newsposts__element a img {
+  width: 100%;
+  max-width: 400px;
 }
 
 /* Стили для кнопки дозагрузки */

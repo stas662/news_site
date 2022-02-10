@@ -95,7 +95,7 @@ export default {
       ],
       picked: '',
       radioNames: '',
-      radioOptions: ['Поместить в рекомендации', 'Не помещать в рекомендации'],
+      radioOptions: ['Поместить в слайдер', 'Не помещать в слайдер'],
       checkedNames: [],
       checkedOptions: ['Наука', 'Техника', 'Космос', 'Гаджеты'],
       addPost: false,
