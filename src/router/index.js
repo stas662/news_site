@@ -8,6 +8,7 @@ import Technics from '@/views/Technics.vue'
 import Space from '@/views/Space.vue'
 import Gadgets from '@/views/Gadgets.vue'
 import AddPost from '@/views/AddPost.vue'
+import Account from '@/views/Account.vue'
 import CarouselPost from '@/components/icp/CarouselPost.vue'
 import NewsPost from '@/components/icp/NewsPost.vue'
 import ArticlesPost from '@/components/icp/ArticlesPost.vue'
@@ -65,6 +66,11 @@ const routes = [
         next('/')
       }
     }
+  },
+  {
+    path: '/account/:id',
+    name: 'Account',
+    component: Account
   },
   {
     path: '/:id',

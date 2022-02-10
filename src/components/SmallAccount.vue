@@ -1,11 +1,11 @@
 <template>
   <div class="content-smallaccount">
-    <div class="content-smallaccount__title">Профиль</div>
+    <router-link :to="`/account/${this.$store.getters['users/getId'](this.$store.getters['users/userEmail'])}`" class="content-smallaccount__title">Профиль</router-link>
     <div class="content-smallaccount__body">
         <img :src="this.$store.getters['users/getImage'](this.$store.getters['users/userEmail'])"
              alt="avatar">
         <div class="content-smallaccount__body-link">
-            <div>{{this.$store.getters['users/userEmail']}}</div>
+            <div>{{this.$store.getters['users/getLogin']}}</div>
             <div >Рейтинг {{this.$store.getters['comments/getRating']}}</div>
             <div class="content-smallaccount__body-link-button">
               Редактировать профиль
@@ -63,6 +63,11 @@ export default {
   margin-left: 15px;
   font-size: 30px;
 }
+
+.content-smallaccount__title:hover {
+  color:#808080;
+}
+
 .content-smallaccount__body {
   display: flex;
   max-width: 700px;
@@ -72,7 +77,8 @@ export default {
 .content-smallaccount__body img {
   width: 150px;
   height: 150px;
-  margin-right: 10px;
+  object-fit: cover;
+  margin: auto 10px auto 0;
 }
 .content-smallaccount__body-link {
     font-size: 20px;

@@ -29,11 +29,13 @@
           <div class="content-sub-articlespost___block"
                v-for="(comment, index) in this.$store.getters['comments/getComments'](this.$store.getters['posts/popularPosts'][this.$route.params.id - 1].id)"
                :key="comment">
-            <div class="content-sub-articlespost___element-body">
-              {{comment.idLogin}}
-            </div>
-            <div class="content-sub-articlespost___element" >
-              <div style="padding: 0 10px">{{comment.body}}</div>
+            <div style="font-size: 20px;"
+                 class="content-sub-articlespost___element-body">
+                <img :src="this.$store.getters['users/getAccount'](comment.idUser).img" alt="avatar">
+                <div style="font-size: 20px;">
+                  <router-link :to="`/account/${comment.idUser}`">{{comment.idLogin}}</router-link>
+                  <div style="margin: 10px;">{{comment.body}}</div>
+                </div>
             </div>
             <div class="content-sub-articlespost___element-body">
               <div class="content-sub-articlespost___element-button">
@@ -259,6 +261,13 @@ export default {
 .content-sub-articlespost___element-body {
   display: flex;
   margin: 15px
+}
+
+.content-sub-articlespost___element-body img {
+  width: 100px;
+  object-fit: cover;
+  height: 100px;
+  margin-right: 10px;
 }
 
 .content-sub-articlespost___element-button {

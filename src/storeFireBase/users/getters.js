@@ -25,6 +25,16 @@ export default {
     return state.users.find(user => user.email === email)
   },
 
+  getLogin (state, getters) {
+    let login = ''
+    state.users.find(user => {
+      if (user.email === getters.userEmail) {
+        login = user.login
+      }
+    })
+    return login
+  },
+
   getImage: state => email => {
     for (const [key, value] of Object.entries(state.users)) {
       if (!key) {
@@ -43,6 +53,17 @@ export default {
       }
       if (value.email === email) {
         return value.id
+      }
+    }
+  },
+
+  getAccount: state => id => {
+    for (const [key, value] of Object.entries(state.users)) {
+      if (!key) {
+        console.log(key)
+      }
+      if (value.id === id) {
+        return value
       }
     }
   }
