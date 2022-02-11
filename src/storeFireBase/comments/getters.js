@@ -39,7 +39,7 @@ export default {
     return like
   },
 
-  getRatingAccount: (state, getters, rootState, rootGetters) => idUser => {
+  getRatingAccount: (state) => idUser => {
     var like = 0
     for (const [key, value] of Object.entries(state.comments)) {
       if (!key) {

@@ -7,6 +7,12 @@ export default {
     set(ref(db, 'comments/' + data.id), data)
   },
 
+  createNestedComment (context, data) {
+    data.id = Date.now()
+    const db = getDatabase()
+    set(ref(db, 'comments/' + data.id), data)
+  },
+
   createUser (context, data) {
     data.id = Date.now()
     const db = getDatabase()
@@ -25,5 +31,10 @@ export default {
     updates['/comments/' + id] = null
     const db = getDatabase()
     return update(ref(db), updates)
+  },
+
+  getArrayComments (context, array) {
+    const arrayComments = array
+    return arrayComments
   }
 }
