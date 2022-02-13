@@ -5,5 +5,13 @@ export default {
 
   clear (state) {
     state.comments = []
+  },
+
+  arrayComment (state, data) {
+    state.arrayComments.push(data)
+  },
+
+  arrayCommentCleat (state) {
+    state.arrayComments = []
   }
 }

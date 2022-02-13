@@ -40,6 +40,7 @@ const auth = getAuth()
 getOnValue('/posts', 'posts/clear', 'posts/addPost')
 getOnValue('/comments', 'comments/clear', 'comments/addComments')
 getOnValue('/users', 'users/clear', 'users/addUsers')
+getOnValue('/arrayComment', 'comments/arrayCommentCleat', 'comments/arrayComment')
 
 const app = createApp(App)
 app.use(store)

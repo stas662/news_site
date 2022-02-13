@@ -25,50 +25,16 @@
     <div class="content-sub-articlespost">
       <div class="content-sub-articlespost___title">Коментарии</div>
       <div class="content-sub-articlespost___body">
-        <div class="content-sub-articlespost___block"
-              v-for="(comment, index) in arrayComments"
-              :key="comment">
-          <div style="font-size: 20px;"
-                class="content-sub-articlespost___element-body">
-              <img :src="this.$store.getters['users/getAccount'](comment.idUser).img" alt="avatar">
-              <div style="font-size: 20px;">
-                <router-link :to="`/account/${comment.idUser}`">{{comment.idLogin}}</router-link>
-                <div style="margin: 10px;">{{comment.body}}</div>
-              </div>
-          </div>
-          <div class="content-sub-articlespost___element-body">
-            <div class="content-sub-articlespost___element-button">
-              <div @click="addLike(comment)">Лайк {{comment.likes}}</div>
-            </div>
-            <div class="content-sub-articlespost___element-button"
-                  v-if="comment.idUser === this.$store.getters['users/getId'](this.$store.getters['users/userEmail'])">
-              <div @click="changeComment(comment, index)" v-if="!this.showTextarea">Изменить</div>
-              <div @click="removeComment(comment)">Удалить</div>
-            </div>
-          </div>
-          <hr>
-          <div id="components">
-            <my-textarea :modelValueTextarea="this.bodyComment" @update="value => this.bodyComment = value"/>
-            <div>
-              <my-button @click="saveUpdatePost(comment)">Сохранить</my-button>
-              <my-button @click="hideComment(index)">Отмена</my-button>
-            </div>
-          </div>
-        </div>
+        <ToDoComment :array="arrayComments" />
       </div>
     </div>
   </div>
-  <my-dialog v-model:show="this.dialogHideComment">
-    <div>Вы точно хотите удалить данный комментарий?</div>
-    <my-button @click="deleteComment(this.myComment)">Удалить</my-button>
-    <my-button @click="this.dialogHideComment = false">Отмена</my-button>
-  </my-dialog>
 </template>
 
 <script>
 import MyTextarea from '@/components/ui/MyTextarea.vue'
 import MyButton from '@/components/ui/MyButton.vue'
-import MyDialog from '@/components/ui/MyDialog.vue'
+import ToDoComment from '@/components/icp/ToDoComment.vue'
 
 export default {
   data () {
@@ -81,7 +47,7 @@ export default {
       userNotFaund: false
     }
   },
-  components: { MyTextarea, MyButton, MyDialog },
+  components: { MyTextarea, MyButton, ToDoComment },
   props: {
     idPost: {
       type: Number,
