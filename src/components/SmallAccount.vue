@@ -2,11 +2,14 @@
   <div class="content-smallaccount">
     <router-link :to="`/account/${this.$store.getters['users/getId'](this.$store.getters['users/userEmail'])}`" class="content-smallaccount__title">Профиль</router-link>
     <div class="content-smallaccount__body">
-        <img :src="this.$store.getters['users/getImage'](this.$store.getters['users/userEmail'])"
+        <img :style="`border: 3px solid ${this.$store.getters['users/getAccountColor'](this.$store.getters['users/getId'](this.$store.getters['users/userEmail']))};`"
+             :src="this.$store.getters['users/getImage'](this.$store.getters['users/userEmail'])"
              alt="avatar">
         <div class="content-smallaccount__body-link">
-            <div>{{this.$store.getters['users/getLogin']}}</div>
-            <div >Рейтинг {{this.$store.getters['comments/getRating']}}</div>
+            <div :style="`font-size: 24px; color: ${this.$store.getters['users/getAccountColor'](this.$store.getters['users/getId'](this.$store.getters['users/userEmail']))};`">
+              {{this.$store.getters['users/getLogin']}}
+            </div>
+            <div>Рейтинг {{this.$store.getters['comments/getRating']}}</div>
             <div class="content-smallaccount__body-link-button">
               Редактировать профиль
             </div>

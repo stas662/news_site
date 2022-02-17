@@ -44,7 +44,8 @@ export default {
       dialogHideComment: false,
       showTextarea: false,
       like: 0,
-      userNotFaund: false
+      userNotFaund: false,
+      saveUrl: null
     }
   },
   components: { MyTextarea, MyButton, ToDoComment },

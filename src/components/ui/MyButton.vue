@@ -24,8 +24,4 @@ button {
   border-radius: 5px;
   max-width: 700px;
 }
-button:hover {
-  background: #d42c2f;
-  border: 1px solid #1d2125;
-}
 </style>

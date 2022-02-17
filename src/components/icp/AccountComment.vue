@@ -16,10 +16,7 @@
 import ToDoComment from '@/components/icp/ToDoComment.vue'
 
 export default {
-  components: { ToDoComment },
-  created () {
-    console.log(this.$store.getters['comments/getCommentsUser'](this.$route.params.id))
-  }
+  components: { ToDoComment }
 }
 </script>
 

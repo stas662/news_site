@@ -61,6 +61,7 @@ export default {
 
   createUser (context, data) {
     data.id = generateUUID()
+    data.color = '#04d9ff'
     if (data.login === undefined) {
       data.login = generateUUID()
     }

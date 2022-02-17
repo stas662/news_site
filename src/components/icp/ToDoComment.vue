@@ -4,9 +4,11 @@
       :key="comment">
     <div>
       <div class="content-sub-articlespost___element-body">
-        <img :src="this.$store.getters['users/getAccount'](comment.idUser).img" alt="avatar">
+        <img :style="`border: 3px solid ${this.$store.getters['users/getAccountColor'](comment.idUser)}`"
+             :src="this.$store.getters['users/getAccount'](comment.idUser).img" alt="avatar">
         <div style="font-size: 20px;">
-          <router-link :to="`/account/${comment.idUser}`">{{comment.idLogin}}</router-link>
+          <router-link :style="`color: ${this.$store.getters['users/getAccountColor'](comment.idUser)}`"
+                       :to="`/account/${comment.idUser}`">{{comment.idLogin}}</router-link>
           <div style="margin: 10px;">{{comment.body}}</div>
         </div>
       </div>
@@ -164,15 +166,21 @@ export default {
       this.userNotFaund = arrayUsers.find((user) => user === idUser)
       if (this.userNotFaund === undefined) {
         arrayUsers.push(idUser)
+        comment.likes = this.like
+        comment.arrayUsersLikes = arrayUsers
         this.userNotFaund = false
       } else {
         this.like = comment.likes - 1
         const index = arrayUsers.indexOf('idUser')
         arrayUsers.splice(index, 1)
+        comment.likes = this.like
+        comment.arrayUsersLikes = arrayUsers
       }
-      comment.likes = this.like
-      comment.arrayUsersLikes = arrayUsers
-      this.$store.dispatch('comments/updateNestedComment', comment)
+      if (comment.idParent === undefined) {
+        this.$store.dispatch('comments/updateComment', comment)
+      } else {
+        this.$store.dispatch('comments/updateNestedComment', comment)
+      }
     }
   }
 }

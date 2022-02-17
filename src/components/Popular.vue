@@ -23,7 +23,8 @@
 export default {
   data () {
     return {
-      imgUrl: ''
+      imgUrl: '',
+      saveUrl: null
     }
   }
   // Кнопка дозагрузки постов

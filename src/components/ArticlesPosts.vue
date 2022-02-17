@@ -25,8 +25,6 @@ export default {
     return {
       imgUrl: ''
     }
-  },
-  components: {
   }
   // Кнопка дозагрузки постов
   // data () {

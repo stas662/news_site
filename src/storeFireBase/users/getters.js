@@ -66,5 +66,27 @@ export default {
         return value
       }
     }
+  },
+
+  getAccountImage: state => id => {
+    for (const [key, value] of Object.entries(state.users)) {
+      if (!key) {
+        console.log(key)
+      }
+      if (value.id === id) {
+        return value.img
+      }
+    }
+  },
+
+  getAccountColor: state => id => {
+    for (const [key, value] of Object.entries(state.users)) {
+      if (!key) {
+        console.log(key)
+      }
+      if (value.id === id) {
+        return value.color
+      }
+    }
   }
 }

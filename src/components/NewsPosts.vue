@@ -50,7 +50,8 @@ import Recommended from '@/components/Recommended.vue'
 export default {
   data () {
     return {
-      imgUrl: ''
+      imgUrl: '',
+      saveUrl: null
     }
   },
   components: {

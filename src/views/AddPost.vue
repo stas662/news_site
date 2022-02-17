@@ -12,9 +12,8 @@
                    @update="value => this.body = value"/>
       <div>
         <my-input class="content-addpost__form-sub-input"
-                  placeholderText='Ссылка на картинку'
-                  :modelValue="this.img"
-                  @update="value => this.img = value" />
+                  type="file" accept="image/*"
+                  @change="onFileChange" />
         <div>
           <my-select :modelValueSelect="this.selected"
                      @update="value => this.selected = value">
@@ -103,7 +102,8 @@ export default {
       myPost: '',
       delete: false,
       update: false,
-      saveUpdate: false
+      saveUpdate: false,
+      file: null
     }
   },
   methods: {
@@ -116,14 +116,18 @@ export default {
       this.radioNames = ''
       this.checkedNames = []
     },
+    onFileChange (e) {
+      this.file = e.target.files[0]
+    },
     createMyPost () {
       this.update = false
       this.addPost = true
+      const idPost = Date.now()
       this.$store.dispatch('posts/createPost', {
-        id: Date.now(),
+        id: idPost,
         title: this.title,
         body: this.body,
-        img: this.img,
+        file: this.file,
         selected: this.selected,
         radioNames: this.radioNames,
         checkedNames: this.checkedNames

@@ -58,7 +58,8 @@ export default {
   data () {
     return {
       visibleSlide: 0,
-      direction: 'left'
+      direction: 'left',
+      saveUrl: null
     }
   },
   computed: {
