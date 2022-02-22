@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="content-sub-articlespost">
-      <div class="content-sub-articlespost___title">Надавняя активность</div>
+      <div class="content-sub-articlespost___title">Недавняя активность</div>
       <div class="content-sub-articlespost___body">
         <ToDoComment
           :array="this.$store.getters['comments/getCommentsUser'](this.$route.params.id)"

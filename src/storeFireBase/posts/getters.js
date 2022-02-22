@@ -43,12 +43,14 @@ export default {
     return arrayArticles
   },
 
-  // Поиск популярных постов по количеству комментариев
+  // Поиск популярных постов по количеству лайков
   // Примечание доработать добавив дату и сортировку
   popularPosts (state, getters, rootState, rootGetters) {
     const popularArray = []
+    let count = 0
     for (let i = 0; i < state.posts.length; i++) {
-      if (rootGetters['comments/getComments'](state.posts[i].id).length > 0) {
+      if (count < 4) {
+        count++
         popularArray.push(state.posts[i])
       }
     }

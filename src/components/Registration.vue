@@ -2,13 +2,16 @@
   <div class="content-registration">
       <div class="content-registration__title">Регистрация</div>
     <div class="content-registration__block">
+      <div class="error" v-if='this.loginError'>{{this.messageLoginError}}</div>
       <my-input placeholderText='Логин'
                 :modelValue="this.newLogin"
                 @update="value => this.newLogin = value" />
+      <div class="error" v-if='this.emailError'>{{this.messageEmailError}}</div>
       <my-input type="email"
                 placeholderText='Email'
                 :modelValue="newEmail"
                 @update="value => newEmail = value" />
+      <div class="error" v-if='this.passwordError'>{{this.messagePasswordError}}</div>
       <my-input type="password"
                 placeholderText='Пароль'
                 :modelValue="newPassword"
@@ -35,7 +38,13 @@ export default {
     return {
       newLogin: '',
       newEmail: '',
-      newPassword: ''
+      newPassword: '',
+      messageLoginError: '',
+      messageEmailError: '',
+      messagePasswordError: '',
+      loginError: false,
+      emailError: false,
+      passwordError: false
     }
   },
   components: { MyInput, MyButton },
@@ -44,7 +53,8 @@ export default {
       this.$store.state.users.dialogReg = false
       this.$store.state.users.active = true
       this.$store.dispatch('users/doCreate', {
-        login: this.newEmail,
+        login: this.newLogin,
+        email: this.newEmail,
         password: this.newPassword
       }).then((status) => {
         if (status === 'OK') {
@@ -96,5 +106,15 @@ export default {
 .content-link:hover {
   cursor: pointer;
   color: rgba(238, 238, 238, 1);
+}
+
+.error {
+  padding: 15px;
+  max-width: 250px;
+  margin-bottom: 10px;
+  background: #eee;
+  text-align: center;
+  color: #000;
+  border-radius: 5px;
 }
 </style>

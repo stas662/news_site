@@ -1,5 +1,6 @@
-import { getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from 'firebase/auth'
-import { getDatabase, ref, set } from 'firebase/database'
+import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import { getDatabase, ref, set, update } from 'firebase/database'
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 function generateUUID () {
   var d = new Date().getTime()
@@ -45,28 +46,50 @@ export default {
   },
 
   doCreate (context, data) {
-    const auth = getAuth()
-    return createUserWithEmailAndPassword(auth, data.login, data.password)
-      .then((userCredential) => {
-        context.state.user = userCredential.user
-        context.state.userAuth = false
-        return 'OK'
-      })
-      .catch((error) => {
-        return `error ${error.message}`
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-      })
+    // const auth = getAuth()
+    // return createUserWithEmailAndPassword(auth, data.email, data.password)
+    //   .then((userCredential) => {
+    //     context.state.user = userCredential.user
+    //     context.state.userAuth = false
+    //     return 'OK'
+    //   })
+    //   .catch((error) => {
+    //     return `error ${error.message}`
+    //     // const errorCode = error.code;
+    //     // const errorMessage = error.message;
+    //   })
   },
 
   createUser (context, data) {
-    data.id = generateUUID()
+    data.id = data.login
     data.color = '#04d9ff'
-    if (data.login === undefined) {
-      data.login = generateUUID()
-    }
     data.img = 'https://www.meme-arsenal.com/memes/d9cffaded34167af95ce6b0611494ca0.jpg'
     const db = getDatabase()
     set(ref(db, 'users/' + data.id), data)
+  },
+
+  async updateUser (context, data) {
+    if (data.file !== undefined) {
+      const newGuid = generateUUID()
+      const storage = getStorage()
+      const storeRef = storageRef(storage, 'images/' + newGuid)
+
+      // Загрузка картинки в firebase
+      await uploadBytes(storeRef, data.file).then((snapshot) => {
+        console.log('Uploaded a blob or file!', data.file)
+      })
+
+      // Получение ссылки на картинку и запись этой ссылки в БД
+      await getDownloadURL(storageRef(storage, 'images/' + newGuid)).then(url => {
+        data.img = url
+        return data.img
+      })
+
+      delete data.file
+    }
+    const updates = {}
+    updates['/users/' + data.id] = data
+    const db = getDatabase()
+    return update(ref(db), updates)
   }
 }

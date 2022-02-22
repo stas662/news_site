@@ -171,6 +171,7 @@ export default {
       this.myPost = post.id
     },
     deletePost (id) {
+      this.$store.dispatch('comments/deletePostAndComment', id)
       this.$store.dispatch('posts/deletePost', id)
       this.dialogHide = false
     }

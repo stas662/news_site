@@ -18,7 +18,8 @@ function generateUUID () {
 
 export default {
   async createPost (context, data) {
-    data.id = Date.now()
+    data.id = generateUUID()
+    data.data = Date.now()
     const newGuid = generateUUID()
     const storage = getStorage()
     const storeRef = storageRef(storage, 'images/' + newGuid)
@@ -33,8 +34,6 @@ export default {
       data.img = url
       return data.img
     })
-
-    console.log(data.img)
 
     delete data.file
     const db = getDatabase()
