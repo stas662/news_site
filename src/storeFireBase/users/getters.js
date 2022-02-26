@@ -88,5 +88,55 @@ export default {
         return value.color
       }
     }
+  },
+
+  getAccountData: state => id => {
+    for (const [key, value] of Object.entries(state.users)) {
+      if (!key) {
+        console.log(key)
+      }
+      if (value.id === id) {
+        return value.registration
+      }
+    }
+  },
+
+  getAccountName: state => id => {
+    for (const [key, value] of Object.entries(state.users)) {
+      if (!key) {
+        console.log(key)
+      }
+      if (value.id === id) {
+        return value.name
+      }
+    }
+  },
+
+  getAccountInfo: state => id => {
+    for (const [key, value] of Object.entries(state.users)) {
+      if (!key) {
+        console.log(key)
+      }
+      if (value.id === id) {
+        if (value.info !== undefined) {
+          return value.info
+        }
+        return false
+      }
+    }
+  },
+
+  getAccountViolations: state => id => {
+    for (const [key, value] of Object.entries(state.users)) {
+      if (!key) {
+        console.log(key)
+      }
+      if (value.id === id) {
+        if (value.violations !== undefined) {
+          return Object.entries(value.violations).length
+        }
+        return 0
+      }
+    }
   }
 }

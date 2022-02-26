@@ -6,6 +6,7 @@
         <ToDoComment
           :array="this.$store.getters['comments/getCommentsUser'](this.$route.params.id)"
           :img="this.$store.getters['users/getAccount'](this.$route.params.id).img"
+          :color="this.color"
         />
       </div>
     </div>
@@ -16,7 +17,13 @@
 import ToDoComment from '@/components/icp/ToDoComment.vue'
 
 export default {
-  components: { ToDoComment }
+  components: { ToDoComment },
+  props: {
+    color: {
+      type: String,
+      default: ''
+    }
+  }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-    <input v-model="inputValue" :placeholder="placeholderText" :style="styleInput">
+    <input v-model="inputValue" :placeholder="placeholderText">
 </template>
 
 <script>
@@ -17,17 +17,14 @@ export default {
     placeholderText: {
       type: String,
       default: null
-    },
-    styleInput: {
-      type: String,
-      default: null
     }
   },
   watch: {
     modelValue: {
       handler () {
         this.inputValue = this.modelValue
-      }
+      },
+      immediate: true
     },
     inputValue: {
       handler () {
@@ -48,7 +45,7 @@ input {
   border-radius: 5px;
   border: 1px solid transparent;
   background: #2b2c31;
-  max-width: 700px;
+  /* max-width: 700px; */
 }
 input:focus {
   border: 1px solid rgba(238, 238, 238, 1);

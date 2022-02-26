@@ -27,7 +27,8 @@ export default {
     modelValueTextarea: {
       handler () {
         this.textareaValue = this.modelValueTextarea
-      }
+      },
+      immediate: true
     },
     textareaValue: {
       handler () {
@@ -49,7 +50,7 @@ textarea {
   color: #eee;
   height: 200px;
   background: #2b2c31;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: "Gill Sans", sans-serif;
 }
 textarea:focus {
   border: 1px solid rgba(238, 238, 238, 1);

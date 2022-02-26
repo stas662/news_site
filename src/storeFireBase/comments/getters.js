@@ -63,6 +63,29 @@ function getAllRating (elements, id) {
   return like
 }
 
+function getAllComments (elements, id) {
+  var count = 0
+  for (const [key, value] of Object.entries(elements)) {
+    if (!key) {
+      console.log(key)
+    }
+    if (value.arrayComment !== undefined) {
+      for (const [newKey, newValue] of Object.entries(value.arrayComment)) {
+        if (!newKey) {
+          console.log(newKey)
+        }
+        if (newValue.idUser === id) {
+          count++
+        }
+      }
+    }
+    if (value.idUser === id) {
+      count++
+    }
+  }
+  return count
+}
+
 export default {
   getComments: state => id => {
     return state.comments.filter(comment => comment.idPost === id)
@@ -116,5 +139,9 @@ export default {
 
   getRatingAccount: (state) => idUser => {
     return getAllRating(state.comments, idUser)
+  },
+
+  getCountComments: (state) => idUser => {
+    return getAllComments(state.comments, idUser)
   }
 }

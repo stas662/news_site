@@ -6,6 +6,10 @@
           <img src="@/assets/logo.png" alt="logo">
           Наука и Техника
         </router-link>
+        <router-link class="new-header-logo" to="/">
+          <img src="@/assets/logo.png" alt="logo">
+          Н&Т
+        </router-link>
         <div class="header-nav">
           <Navigation />
           <div @click="this.$store.getters['users/authDialog']" v-if="!this.$store.getters['users/isAuth']" class="header-nav__icon">
@@ -124,6 +128,10 @@ body {
   margin: auto 10px auto 0;
 }
 
+.new-header-logo {
+  display: none;
+}
+
 .header-nav {
   display: flex;
 }
@@ -149,6 +157,29 @@ body {
 
 .content-header__fixed {
   height: 50px;
+}
+
+@media screen and (max-width: 490px) {
+  .header-logo {
+    display: none;
+  }
+  .new-header-logo {
+    display: flex;
+    text-decoration: none;
+    line-height: 50px;
+    max-height: 50px;
+    font-size: 26px;
+    font-family: Cursive;
+    color: #EEE;
+    margin-left: 5px;
+  }
+
+  .new-header-logo img {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin: auto 10px auto 0;
+  }
 }
 
 </style>

@@ -4,10 +4,16 @@
       :key="comment">
     <div>
       <div class="content-sub-articlespost___element-body">
-        <img :style="`border: 3px solid ${this.$store.getters['users/getAccountColor'](comment.idUser)}`"
+        <img v-if="this.color !== '' && comment.idUser === this.$store.getters['users/getId'](this.$store.getters['users/userEmail'])"
+             :style="`border: 3px solid ${this.color}`"
+             :src="this.$store.getters['users/getAccount'](comment.idUser).img" alt="avatar">
+        <img v-else :style="`border: 3px solid ${this.$store.getters['users/getAccountColor'](comment.idUser)}`"
              :src="this.$store.getters['users/getAccount'](comment.idUser).img" alt="avatar">
         <div style="font-size: 20px;">
-          <router-link :style="`color: ${this.$store.getters['users/getAccountColor'](comment.idUser)}`"
+          <router-link v-if="this.color !== '' && comment.idUser === this.$store.getters['users/getId'](this.$store.getters['users/userEmail'])"
+                       :style="`color: ${this.color}`"
+                       :to="`/account/${comment.idUser}`">{{comment.idLogin}}</router-link>
+          <router-link v-else :style="`color: ${this.$store.getters['users/getAccountColor'](comment.idUser)}`"
                        :to="`/account/${comment.idUser}`">{{comment.idLogin}}</router-link>
           <div style="margin: 10px;">{{comment.body}}</div>
         </div>
@@ -40,6 +46,7 @@
       <ToDoComment v-if="this.$store.getters['comments/getChildComment'](comment.id)"
                    :array="this.$store.getters['comments/getChildComment'](comment.id)"
                    :commentStyle="'margin-left: 5%'"
+                   :color="this.color"
       />
     </div>
     <my-dialog v-model:show="this.dialogHideComment">
@@ -91,6 +98,10 @@ export default {
     img: {
       type: String,
       default: null
+    },
+    color: {
+      type: String,
+      default: ''
     }
   },
   components: { MyTextarea, MyButton, MyDialog },
@@ -266,6 +277,7 @@ export default {
 
 .content-sub-articlespost___element-body {
   display: flex;
+  flex-wrap: wrap;
   margin: 15px;
 }
 

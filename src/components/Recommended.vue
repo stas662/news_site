@@ -27,18 +27,6 @@ export default {
       saveUrl: null
     }
   }
-  // Кнопка дозагрузки постов
-  // data () {
-  //   return {
-  //     nextItem: 4
-  //   }
-  // },
-  // mounted () {
-  //   const listElm = document.querySelector('#infinity-news-home')
-  //   listElm.addEventListener('click', e => {
-  //     this.nextItem += 2
-  //   })
-  // }
 }
 </script>
 

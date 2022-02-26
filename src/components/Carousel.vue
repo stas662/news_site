@@ -6,7 +6,7 @@
     <div v-for="(post, index) in this.$store.getters['posts/carouselPosts']"
          :key="post"
          style="position: relative; margin: auto 0">
-      <carousel-slide style="left: 50%" class="content-recommendedposts__block"
+      <carousel-slide style="left: 50%" class="content-recommendedposts__block d-none"
                       v-show="index - 1 === this.visibleSlide"
                       :visibleSlide="visibleSlide"
                       :direction="direction">
@@ -30,7 +30,7 @@
           </router-link>
         </div>
       </carousel-slide>
-      <carousel-slide style="left: 50%" class="content-recommendedposts__block"
+      <carousel-slide style="left: 50%" class="content-recommendedposts__block d-none"
           v-show="index + slidesLen - 1 === this.visibleSlide"
           :visibleSlide="visibleSlide"
           :direction="direction"
@@ -45,7 +45,7 @@
       </carousel-slide>
     </div>
     <div @click="next" class="content-recommendedposts__next">
-      <img src="~@/assets/right.png" alt="right">
+      <img src="~@/assets/left.png" alt="right">
     </div>
   </div>
 </template>
@@ -96,7 +96,7 @@ export default {
   overflow: hidden;
   justify-content: space-around;
   /* flex-wrap: wrap; */
-  height: 300px;
+  height: 400px;
   margin: 0 auto;
   position: relative;
   padding: 15px 40px;
@@ -123,7 +123,7 @@ export default {
 
 .content-recommendedposts__next {
   right: -17px;
-  transform: translate(-51%, -51%);
+  transform: translate(-51%, -51%) scale(-1, 1);
 }
 
 .content-recommendedposts__prev img,
@@ -138,19 +138,19 @@ export default {
 
 .content-recommendedposts__block {
   /* display: flex; */
-  min-width: 350px;
+  /* min-width: 350px; */
   width: 100%;
-  margin: 5px;
 }
 .content-recommendedposts__element {
   display: flex;
   width: 50%;
-  height: 300px;
+  height: 400px;
   font-weight: bold;
 }
 .content-recommendedposts__element a {
   width: 100%;
   color: #000;
+  overflow: hidden;
   margin: 17px;
   display: flex;
   flex-direction: column;
@@ -161,14 +161,14 @@ export default {
   font-size: 28px;
 }
 .content-recommendedposts__element-img {
-  max-width: 500px;
+  height: 410px;
+  object-fit: cover;
   width: 100%;
   position: absolute;
 }
 .content-recommendedposts__element-title {
   position: absolute;
-  max-width: 500px;
-  padding: 10px 0;
+  padding: 10px;
   background: rgba(0, 0, 0, 0.6);
   width: 100%;
   height: 75px;
@@ -176,6 +176,80 @@ export default {
 
 .content-recommendedposts__element:hover > a div {
   color: rgba(255, 255, 255, 0.6);
+}
+
+@media screen and (max-width: 1200px) {
+  .d-none {
+    display: none;
+    transition: 0.5s all ease-in-out;
+  }
+  .content-recommendedposts {
+    height: 450px;
+    padding: 20px;
+  }
+  .content-recommendedposts__element-img {
+    height: 460px;
+  }
+  .content-recommendedposts__element {
+    width: 100%;
+    overflow: hidden;
+    height: 450px;
+  }
+  .content-recommendedposts__element-title,
+  .content-recommendedposts__element-img {
+    max-width: none;
+  }
+  .content-recommendedposts__element a {
+    margin: 0;
+  }
+  .content-recommendedposts__element-img {
+    top: -10px;
+  }
+  .content-recommendedposts__element-title {
+    bottom: 0px;
+  }
+  .content-recommendedposts__prev,
+  .content-recommendedposts__next {
+    filter: invert(1);
+  }
+  .content-recommendedposts__prev:hover,
+  .content-recommendedposts__next:hover {
+    filter: grayscale(1);
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .content-recommendedposts__element-title {
+    width: auto;
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .content-recommendedposts {
+    max-height: 300px;
+  }
+  .content-recommendedposts__element-img {
+    height: 310px;
+  }
+  .content-recommendedposts__element-title {
+    top: 205px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .content-recommendedposts {
+    max-height: 250px;
+  }
+  .content-recommendedposts__element-img {
+    height: 260px;
+  }
+  .content-recommendedposts__element-title {
+    top: 165px;
+    width: 100%;
+    height: 65px;
+    font-size: 20px;
+  }
 }
 
 </style>

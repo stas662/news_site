@@ -1,17 +1,16 @@
 <template>
-  <div class="wrapper-articlesposts">
-    <div class="content-articlesposts">
-      <router-link to="/news" class="content-articlesposts__title">Новости</router-link>
-      <div class="content-articlesposts__body">
-        <div class="content-articlesposts__block"
-             v-for="(post, index) in this.$store.getters['posts/articlesPosts']"
-             :key="post">
-          <div class="content-articlesposts__element" >
-            <router-link :to="`/news/${index + 1}`">
-              <img :src="post.img" alt="">
-              <div>{{post.title}}</div>
-            </router-link>
-          </div>
+  <div>
+    <router-link :to="`/${this.ref}`" class="content-articlesposts__title">{{postName}}</router-link>
+    <div class="content-articlesposts__body">
+      <div class="content-articlesposts__block"
+            v-for="(post, index) in arrayPosts"
+            :key="post">
+        <div class="content-articlesposts__element" >
+          <slot></slot>
+          <router-link :to="`/${this.ref}/${index + 1}`">
+            <img :src="post.img" alt="">
+            <div>{{post.title}}</div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -19,25 +18,21 @@
 </template>
 
 <script>
-
 export default {
-  data () {
-    return {
-      imgUrl: ''
+  props: {
+    postName: {
+      type: String,
+      default: null
+    },
+    ref: {
+      type: String,
+      default: null
+    },
+    arrayPosts: {
+      type: Array,
+      default: () => []
     }
   }
-  // Кнопка дозагрузки постов
-  // data () {
-  //   return {
-  //     nextItem: 4
-  //   }
-  // },
-  // mounted () {
-  //   const listElm = document.querySelector('#infinity-news-home')
-  //   listElm.addEventListener('click', e => {
-  //     this.nextItem += 2
-  //   })
-  // }
 }
 </script>
 
@@ -111,21 +106,5 @@ export default {
   width: 100%;
   max-width: 400px;
 }
-
-/* Стили для кнопки дозагрузки */
-/* #infinity-news-home {
-  margin: 10px auto 0 auto;
-  cursor: pointer;
-  width: 100%;
-  height: 30px;
-  color: #eee;
-  font-size: 18px;
-  border: none;
-  border-top: 3px solid #151a1e;
-  background: none;
-}
-#infinity-news-home:hover {
-  background: #151a1e;
-} */
 
 </style>

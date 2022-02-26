@@ -10,9 +10,7 @@
               {{this.$store.getters['users/getLogin']}}
             </div>
             <div>Рейтинг {{this.$store.getters['comments/getRating']}}</div>
-            <div class="content-smallaccount__body-link-button">
-              Редактировать профиль
-            </div>
+            <div>Регистрация {{new Date(this.$store.getters['users/getAccountData'](this.$store.getters['users/getId'](this.$store.getters['users/userEmail']))).toLocaleDateString()}}</div>
             <div class="content-smallaccount__body-link-button"
                  @click="dialogLogout">
               Выход
@@ -40,7 +38,10 @@ export default {
       user: ''
     }
   },
-  components: { MyDialog, MyButton },
+  components: {
+    MyDialog,
+    MyButton
+  },
   methods: {
     dialogLogout () {
       this.logout = true
@@ -78,16 +79,21 @@ export default {
   padding: 20px 15px 0 15px;
 }
 .content-smallaccount__body img {
-  width: 150px;
-  height: 150px;
+  width: 190px;
+  min-width: 190px;
+  height: 190px;
   object-fit: cover;
   margin: auto 10px auto 0;
 }
 .content-smallaccount__body-link {
-    font-size: 20px;
+    font-size: 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+.content-smallaccount__body-link div {
+  margin-bottom: 5px;
 }
 
 .content-smallaccount__body-link-button {
@@ -97,5 +103,16 @@ export default {
 .content-smallaccount__body-link-button:hover {
   cursor: pointer;
   color: #808080;
+}
+
+@media screen and (max-width: 700px) {
+  .content-smallaccount__body-link {
+    font-size: 19px;
+  }
+  .content-smallaccount__body img {
+    width: 150px;
+    min-width: 150px;
+    height: 150px;
+  }
 }
 </style>

@@ -1,14 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '@/storeFireBase'// '@/storeMyBackend'
-import Home from '@/views/Home.vue'
-import News from '@/views/News.vue'
-import Articles from '@/views/Articles.vue'
-import Science from '@/views/Science.vue'
-import Technics from '@/views/Technics.vue'
-import Space from '@/views/Space.vue'
-import Gadgets from '@/views/Gadgets.vue'
-import AddPost from '@/views/AddPost.vue'
-import Account from '@/views/Account.vue'
+import HomeView from '@/views/HomeView.vue'
+import NewsView from '@/views/NewsView.vue'
+import ArticlesView from '@/views/ArticlesView.vue'
+import ScienceView from '@/views/ScienceView.vue'
+import TechnicsView from '@/views/TechnicsView.vue'
+import SpaceView from '@/views/SpaceView.vue'
+import GadgetsView from '@/views/GadgetsView.vue'
+import AddPostView from '@/views/AddPostView.vue'
+import AccountView from '@/views/AccountView.vue'
 import CarouselPost from '@/components/icp/CarouselPost.vue'
 import NewsPost from '@/components/icp/NewsPost.vue'
 import ArticlesPost from '@/components/icp/ArticlesPost.vue'
@@ -22,43 +22,43 @@ import RecommendedPost from '@/components/icp/RecommendedPost.vue'
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'HomeView',
+    component: HomeView
   },
   {
     path: '/news',
-    name: 'News',
-    component: News
+    name: 'NewsView',
+    component: NewsView
   },
   {
     path: '/articles',
-    name: 'Articles',
-    component: Articles
+    name: 'ArticlesView',
+    component: ArticlesView
   },
   {
     path: '/science',
-    name: 'Science',
-    component: Science
+    name: 'ScienceView',
+    component: ScienceView
   },
   {
     path: '/technics',
-    name: 'Technics',
-    component: Technics
+    name: 'TechnicsView',
+    component: TechnicsView
   },
   {
     path: '/space',
-    name: 'Space',
-    component: Space
+    name: 'SpaceView',
+    component: SpaceView
   },
   {
     path: '/gadgets',
-    name: 'Gadgets',
-    component: Gadgets
+    name: 'GadgetsView',
+    component: GadgetsView
   },
   {
     path: '/add-post',
-    name: 'AddPost',
-    component: AddPost,
+    name: 'AddPostView',
+    component: AddPostView,
     beforeEnter (to, from, next) {
       if (store.getters['users/isAuth']) {
         next()
@@ -69,8 +69,8 @@ const routes = [
   },
   {
     path: '/account/:id',
-    name: 'Account',
-    component: Account
+    name: 'AccountView',
+    component: AccountView
   },
   {
     path: '/:id',

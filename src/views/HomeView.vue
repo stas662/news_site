@@ -1,17 +1,19 @@
 <template>
   <div>
       <Carousel />
-      <NewsPosts />
+      <Content />
   </div>
 </template>
 
 <script>
 import Carousel from '@/components/Carousel.vue'
-import NewsPosts from '@/components/NewsPosts.vue'
+import Content from '@/components/Content.vue'
 
 export default {
-  name: 'Content',
-  components: { Carousel, NewsPosts }
+  components: {
+    Carousel,
+    Content
+  }
 }
 </script>
 
